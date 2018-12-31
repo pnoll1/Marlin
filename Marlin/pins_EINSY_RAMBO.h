@@ -115,13 +115,16 @@
 #define HEATER_0_PIN        3
 #define HEATER_BED_PIN      4
 
-#ifndef FAN_PIN
-  #define FAN_PIN           8
-#endif
+//#ifndef FAN_PIN
+//  #define FAN_PIN           8
+//#endif
 
 #ifndef FAN1_PIN
   #define FAN1_PIN          6
 #endif
+
+#define TACH_0                 79 // !!! changed from 81 (EINY03)
+#define TACH_1                 80 
 
 //
 // Misc. Functions

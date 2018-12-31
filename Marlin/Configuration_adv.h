@@ -237,12 +237,12 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN -1
-#define E1_AUTO_FAN_PIN -1
-#define E2_AUTO_FAN_PIN -1
-#define E3_AUTO_FAN_PIN -1
-#define E4_AUTO_FAN_PIN -1
-#define CHAMBER_AUTO_FAN_PIN -1
+#define E0_AUTO_FAN_PIN 8
+//#define E1_AUTO_FAN_PIN -1
+//#define E2_AUTO_FAN_PIN -1
+//#define E3_AUTO_FAN_PIN -1
+//#define E4_AUTO_FAN_PIN -1
+//#define CHAMBER_AUTO_FAN_PIN -1
 #define EXTRUDER_AUTO_FAN_TEMPERATURE 50
 #define EXTRUDER_AUTO_FAN_SPEED   255  // == full speed
 
@@ -622,7 +622,7 @@
    *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
    *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
    */
-  //#define SDCARD_SORT_ALPHA
+  #define SDCARD_SORT_ALPHA
 
   // SD Card Sorting options
   #if ENABLED(SDCARD_SORT_ALPHA)
@@ -774,7 +774,7 @@
  * See http://marlinfw.org/docs/features/lin_advance.html for full instructions.
  * Mention @Sebastianv650 on GitHub to alert the author of any issues.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   #define LIN_ADVANCE_K 0.22  // Unit: mm compression per 1mm/s extruder speed
   //#define LA_DEBUG          // If enabled, this will generate debug information output over USB.
@@ -1098,42 +1098,42 @@
  */
 #if HAS_TRINAMIC
 
-  #define R_SENSE           0.11  // R_sense resistor for SilentStepStick2130
-  #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
+  #define R_SENSE           0.22  // R_sense resistor for SilentStepStick2130, 0.11 in marlin orig
+  #define HOLD_MULTIPLIER    1  // Scales down the holding current from run current
   #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
-  #define X_CURRENT          800  // rms current in mA. Multiply by 1.41 for peak current.
+  #define X_CURRENT          282  // rms current in mA. Multiply by 1.41 for peak current.
   #define X_MICROSTEPS        16  // 0..256
 
-  #define Y_CURRENT          800
+  #define Y_CURRENT          348
   #define Y_MICROSTEPS        16
 
-  #define Z_CURRENT          800
+  #define Z_CURRENT          530
   #define Z_MICROSTEPS        16
 
-  #define X2_CURRENT         800
-  #define X2_MICROSTEPS       16
+  //#define X2_CURRENT         800
+  //#define X2_MICROSTEPS       16
 
-  #define Y2_CURRENT         800
-  #define Y2_MICROSTEPS       16
+  //#define Y2_CURRENT         800
+  //#define Y2_MICROSTEPS       16
 
-  #define Z2_CURRENT         800
-  #define Z2_MICROSTEPS       16
+  //#define Z2_CURRENT         530
+  //#define Z2_MICROSTEPS       16
 
-  #define E0_CURRENT         800
-  #define E0_MICROSTEPS       16
+  #define E0_CURRENT         514
+  #define E0_MICROSTEPS       32
 
-  #define E1_CURRENT         800
-  #define E1_MICROSTEPS       16
+  //#define E1_CURRENT         800
+  //#define E1_MICROSTEPS       16
 
-  #define E2_CURRENT         800
-  #define E2_MICROSTEPS       16
+  //#define E2_CURRENT         800
+  //#define E2_MICROSTEPS       16
 
-  #define E3_CURRENT         800
-  #define E3_MICROSTEPS       16
+  //#define E3_CURRENT         800
+  //#define E3_MICROSTEPS       16
 
-  #define E4_CURRENT         800
-  #define E4_MICROSTEPS       16
+  //#define E4_CURRENT         800
+  //#define E4_MICROSTEPS       16
 
   /**
    * Use software SPI for TMC2130.
@@ -1202,12 +1202,12 @@
    * It is advised to set X/Y/Z_HOME_BUMP_MM to 0.
    * M914 X/Y/Z to live tune the setting
    */
-  //#define SENSORLESS_HOMING // TMC2130 only
+  #define SENSORLESS_HOMING // TMC2130 only
 
   #if ENABLED(SENSORLESS_HOMING)
-    #define X_HOMING_SENSITIVITY  8
-    #define Y_HOMING_SENSITIVITY  8
-    #define Z_HOMING_SENSITIVITY  8
+    #define X_HOMING_SENSITIVITY  3
+    #define Y_HOMING_SENSITIVITY  3
+    #define Z_HOMING_SENSITIVITY  4
   #endif
 
   /**
@@ -1231,6 +1231,50 @@
     #define CALIBRATION_CURRENT 250
     #define CALIBRATION_EXTRA_HEIGHT 10
   #endif
+
+  //define extra TMC2130 variables
+  #define TMC2130_FCLK 12000000       // fclk = 12MHz
+  #define TMC2130_PWM_GRAD_X  2         // PWMCONF
+  #define TMC2130_PWM_AMPL_X  230       // PWMCONF
+  #define TMC2130_PWM_AUTO_X  1         // PWMCONF
+  #define TMC2130_PWM_FREQ_X  2         // PWMCONF
+  
+  #define TMC2130_PWM_GRAD_Y  2         // PWMCONF
+  #define TMC2130_PWM_AMPL_Y  235       // PWMCONF
+  #define TMC2130_PWM_AUTO_Y  1         // PWMCONF
+  #define TMC2130_PWM_FREQ_Y  2         // PWMCONF
+  
+  #define TMC2130_PWM_GRAD_Z  4         // PWMCONF
+  #define TMC2130_PWM_AMPL_Z  200       // PWMCONF
+  #define TMC2130_PWM_AUTO_Z  1         // PWMCONF
+  #define TMC2130_PWM_FREQ_Z  2         // PWMCONF
+  
+  #define TMC2130_PWM_GRAD_E  4         // PWMCONF
+  #define TMC2130_PWM_AMPL_E  240       // PWMCONF
+  #define TMC2130_PWM_AUTO_E  1         // PWMCONF
+  #define TMC2130_PWM_FREQ_E  2         // PWMCONF
+  
+  #define TMC2130_TOFF_XYZ    3         // CHOPCONF // fchop = 27.778kHz
+  #define TMC2130_TOFF_E      3         // CHOPCONF // fchop = 27.778kHz
+  //#define TMC2130_TOFF_E      4         // CHOPCONF // fchop = 21.429kHz
+  //#define TMC2130_TOFF_E      5         // CHOPCONF // fchop = 17.442kHz
+  
+  //#define TMC2130_STEALTH_E // Extruder stealthChop mode
+  //#define TMC2130_CNSTOFF_E // Extruder constant-off-time mode (similar to MK2)
+  
+  //#define TMC2130_PWM_DIV   683         // PWM frequency divider (1024, 683, 512, 410)
+  #define TMC2130_PWM_DIV   512         // PWM frequency divider (1024, 683, 512, 410)
+  #define TMC2130_PWM_CLK   (2 * TMC2130_FCLK / TMC2130_PWM_DIV) // PWM frequency (23.4kHz, 35.1kHz, 46.9kHz, 58.5kHz for 12MHz fclk)
+  
+  #define TMC2130_TPWMTHRS  0         // TPWMTHRS - Sets the switching speed threshold based on TSTEP from stealthChop to spreadCycle mode
+  #define TMC2130_THIGH     0         // THIGH - unused
+  
+  //#define TMC2130_TCOOLTHRS_X 450       // TCOOLTHRS - coolstep treshold
+  //#define TMC2130_TCOOLTHRS_Y 450       // TCOOLTHRS - coolstep treshold
+  #define TMC2130_TCOOLTHRS_X 430       // TCOOLTHRS - coolstep treshold
+  #define TMC2130_TCOOLTHRS_Y 430       // TCOOLTHRS - coolstep treshold
+  #define TMC2130_TCOOLTHRS_Z 500       // TCOOLTHRS - coolstep treshold
+  #define TMC2130_TCOOLTHRS_E 500       // TCOOLTHRS - coolstep treshold
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
