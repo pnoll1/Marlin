@@ -128,7 +128,7 @@
  * Also, if the temperature is set to a value below mintemp, it will not be changed by autotemp.
  * On an Ultimaker, some initial testing worked with M109 S215 B260 F1 in the start.gcode
  */
-#define AUTOTEMP
+//#define AUTOTEMP
 #if ENABLED(AUTOTEMP)
   #define AUTOTEMP_OLDWEIGHT 0.98
 #endif
@@ -206,7 +206,7 @@
 // When first starting the main fan, run it at full speed for the
 // given number of milliseconds.  This gets the fan spinning reliably
 // before setting a PWM value. (Does not work with software PWM for fan on Sanguinololu)
-//#define FAN_KICKSTART_TIME 100
+#define FAN_KICKSTART_TIME 800
 
 /**
  * PWM Fan Scaling
@@ -410,7 +410,7 @@
 // Default stepper release if idle. Set to 0 to deactivate.
 // Steppers will shut down DEFAULT_STEPPER_DEACTIVE_TIME seconds after the last move when DISABLE_INACTIVE_? is true.
 // Time can be set by M18 and M84.
-#define DEFAULT_STEPPER_DEACTIVE_TIME 120
+#define DEFAULT_STEPPER_DEACTIVE_TIME 60
 #define DISABLE_INACTIVE_X true
 #define DISABLE_INACTIVE_Y true
 #define DISABLE_INACTIVE_Z true  // set to false if the nozzle will fall down on your printed part when print has finished.
@@ -524,16 +524,16 @@
 // @section lcd
 
 // Include a page of printer information in the LCD Main Menu
-//#define LCD_INFO_MENU
+#define LCD_INFO_MENU
 
 // Scroll a longer status message into view
-//#define STATUS_MESSAGE_SCROLLING
+#define STATUS_MESSAGE_SCROLLING
 
 // On the Info Screen, display XY with one decimal place when possible
 //#define LCD_DECIMAL_SMALL_XY
 
 // The timeout (in ms) to return to the status screen from sub-menus
-//#define LCD_TIMEOUT_TO_STATUS 15000
+#define LCD_TIMEOUT_TO_STATUS 15000
 
 // Add an 'M73' G-code to set the current percentage
 //#define LCD_SET_PROGRESS_MANUALLY
@@ -573,14 +573,14 @@
   // as SD_DETECT_PIN in your board's pins definitions.
   // This setting should be disabled unless you are using a push button, pulling the pin to ground.
   // Note: This is always disabled for ULTIPANEL (except ELB_FULL_GRAPHIC_CONTROLLER).
-  #define SD_DETECT_INVERTED
+  //#define SD_DETECT_INVERTED
 
   #define SD_FINISHED_STEPPERRELEASE true          // Disable steppers when SD Print is finished
   #define SD_FINISHED_RELEASECOMMAND "M84 X Y Z E" // You might want to keep the z enabled so your bed stays in place.
 
   // Reverse SD sort to show "more recent" files first, according to the card's FAT.
   // Since the FAT gets out of order with usage, SDCARD_SORT_ALPHA is recommended.
-  #define SDCARD_RATHERRECENTFIRST
+  //#define SDCARD_RATHERRECENTFIRST
 
   // Add an option in the menu to run all auto#.g files
   //#define MENU_ADDAUTOSTART
@@ -744,13 +744,13 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define BABYSTEP_XY              // Also enable X/Y Babystepping. Not supported on DELTA!
   #define BABYSTEP_INVERT_Z false    // Change if Z babysteps should go the other way
   #define BABYSTEP_MULTIPLICATOR 1   // Babysteps are very small. Increase for faster motion.
   //#define BABYSTEP_ZPROBE_OFFSET   // Enable to combine M851 and Babystepping
-  //#define DOUBLECLICK_FOR_Z_BABYSTEPPING // Double-click on the Status Screen for Z Babystepping.
+  #define DOUBLECLICK_FOR_Z_BABYSTEPPING // Double-click on the Status Screen for Z Babystepping.
   #define DOUBLECLICK_MAX_INTERVAL 1250 // Maximum interval between clicks, in milliseconds.
                                         // Note: Extra time may be added to mitigate controller latency.
   //#define BABYSTEP_ZPROBE_GFX_OVERLAY // Enable graphical overlay on Z-offset editor
@@ -828,7 +828,7 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MINIMUM_STEPPER_DIR_DELAY 650
+#define MINIMUM_STEPPER_DIR_DELAY 20
 
 /**
  * Minimum stepper driver pulse width (in µs)
@@ -841,7 +841,7 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MINIMUM_STEPPER_PULSE 2
+#define MINIMUM_STEPPER_PULSE 0
 
 /**
  * Maximum stepping rate (in Hz) the stepper driver allows
@@ -855,7 +855,7 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MAXIMUM_STEPPER_RATE 250000
+#define MAXIMUM_STEPPER_RATE 400000
 
 // @section temperature
 
@@ -1149,7 +1149,7 @@
    * Use Trinamic's ultra quiet stepping mode.
    * When disabled, Marlin will use spreadCycle stepping mode.
    */
-  #define STEALTHCHOP
+  //#define STEALTHCHOP
 
   /**
    * Monitor Trinamic TMC2130 and TMC2208 drivers for error conditions,
@@ -1162,7 +1162,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 S0/1 - Report driver parameters (Requires TMC_DEBUG)
    */
-  //#define MONITOR_DRIVER_STATUS
+  #define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -1226,55 +1226,12 @@
    * Use M915 Snn to specify the current.
    * Use M925 Znn to add extra Z height to Z_MAX_POS.
    */
-  //#define TMC_Z_CALIBRATION
+  #define TMC_Z_CALIBRATION
   #if ENABLED(TMC_Z_CALIBRATION)
-    #define CALIBRATION_CURRENT 250
+    #define CALIBRATION_CURRENT 348
     #define CALIBRATION_EXTRA_HEIGHT 10
   #endif
 
-  //define extra TMC2130 variables
-  #define TMC2130_FCLK 12000000       // fclk = 12MHz
-  #define TMC2130_PWM_GRAD_X  2         // PWMCONF
-  #define TMC2130_PWM_AMPL_X  230       // PWMCONF
-  #define TMC2130_PWM_AUTO_X  1         // PWMCONF
-  #define TMC2130_PWM_FREQ_X  2         // PWMCONF
-  
-  #define TMC2130_PWM_GRAD_Y  2         // PWMCONF
-  #define TMC2130_PWM_AMPL_Y  235       // PWMCONF
-  #define TMC2130_PWM_AUTO_Y  1         // PWMCONF
-  #define TMC2130_PWM_FREQ_Y  2         // PWMCONF
-  
-  #define TMC2130_PWM_GRAD_Z  4         // PWMCONF
-  #define TMC2130_PWM_AMPL_Z  200       // PWMCONF
-  #define TMC2130_PWM_AUTO_Z  1         // PWMCONF
-  #define TMC2130_PWM_FREQ_Z  2         // PWMCONF
-  
-  #define TMC2130_PWM_GRAD_E  4         // PWMCONF
-  #define TMC2130_PWM_AMPL_E  240       // PWMCONF
-  #define TMC2130_PWM_AUTO_E  1         // PWMCONF
-  #define TMC2130_PWM_FREQ_E  2         // PWMCONF
-  
-  #define TMC2130_TOFF_XYZ    3         // CHOPCONF // fchop = 27.778kHz
-  #define TMC2130_TOFF_E      3         // CHOPCONF // fchop = 27.778kHz
-  //#define TMC2130_TOFF_E      4         // CHOPCONF // fchop = 21.429kHz
-  //#define TMC2130_TOFF_E      5         // CHOPCONF // fchop = 17.442kHz
-  
-  //#define TMC2130_STEALTH_E // Extruder stealthChop mode
-  //#define TMC2130_CNSTOFF_E // Extruder constant-off-time mode (similar to MK2)
-  
-  //#define TMC2130_PWM_DIV   683         // PWM frequency divider (1024, 683, 512, 410)
-  #define TMC2130_PWM_DIV   512         // PWM frequency divider (1024, 683, 512, 410)
-  #define TMC2130_PWM_CLK   (2 * TMC2130_FCLK / TMC2130_PWM_DIV) // PWM frequency (23.4kHz, 35.1kHz, 46.9kHz, 58.5kHz for 12MHz fclk)
-  
-  #define TMC2130_TPWMTHRS  0         // TPWMTHRS - Sets the switching speed threshold based on TSTEP from stealthChop to spreadCycle mode
-  #define TMC2130_THIGH     0         // THIGH - unused
-  
-  //#define TMC2130_TCOOLTHRS_X 450       // TCOOLTHRS - coolstep treshold
-  //#define TMC2130_TCOOLTHRS_Y 450       // TCOOLTHRS - coolstep treshold
-  #define TMC2130_TCOOLTHRS_X 430       // TCOOLTHRS - coolstep treshold
-  #define TMC2130_TCOOLTHRS_Y 430       // TCOOLTHRS - coolstep treshold
-  #define TMC2130_TCOOLTHRS_Z 500       // TCOOLTHRS - coolstep treshold
-  #define TMC2130_TCOOLTHRS_E 500       // TCOOLTHRS - coolstep treshold
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
@@ -1288,7 +1245,49 @@
    *   stepperY.interpolate(0); \
    * }
    */
-  #define TMC_ADV() {  }
+  #define TMC_ADV() { \
+    stepperX.hold_delay(8); \
+    stepperY.hold_delay(8); \
+    stepperZ.hold_delay(8); \
+    stepperE0.hold_delay(8); \
+    stepperX.power_down_delay(0); \
+    stepperY.power_down_delay(0); \
+    stepperZ.power_down_delay(0); \
+    stepperE0.power_down_delay(0); \
+    stepperX.blank_time(24); \
+    stepperY.blank_time(24); \
+    stepperZ.blank_time(24); \
+    stepperE0.blank_time(24); \
+    stepperX.off_time(3); \
+    stepperY.off_time(3); \
+    stepperZ.off_time(3); \
+    stepperE0.off_time(3); \
+    stepperX.hysteresis_end(1); \
+    stepperY.hysteresis_end(1); \
+    stepperZ.hysteresis_end(1); \
+    stepperE0.hysteresis_end(1); \
+    stepperX.hysteresis_start(5); \
+    stepperY.hysteresis_start(5); \
+    stepperZ.hysteresis_start(5); \
+    stepperE0.hysteresis_start(5); \
+    stepperX.stealth_freq(2); \
+    stepperY.stealth_freq(2); \
+    stepperZ.stealth_freq(2); \
+    stepperE0.stealth_freq(2); \
+    stepperX.stealth_gradient(4); \
+    stepperY.stealth_gradient(4); \
+    stepperZ.stealth_gradient(4); \
+    stepperE0.stealth_gradient(4); \
+    stepperX.stealth_amplitude(230); \
+    stepperY.stealth_amplitude(235); \
+    stepperZ.stealth_amplitude(200); \
+    stepperE0.stealth_amplitude(240); \
+    stepperX.stealth_autoscale(true); \
+    stepperY.stealth_autoscale(true); \
+    stepperZ.stealth_autoscale(true); \
+    stepperE0.stealth_autoscale(true); \
+    stepperE0.sg_stall_value(3); \
+    }
 
 #endif // TMC2130 || TMC2208
 

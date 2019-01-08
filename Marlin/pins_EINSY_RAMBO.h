@@ -29,6 +29,7 @@
 #endif
 
 #define BOARD_NAME         "Einsy Rambo"
+#define LARGE_FLASH         true
 
 //
 // TMC2130 Configuration_adv defaults for EinsyRambo
@@ -119,12 +120,12 @@
 //  #define FAN_PIN           8
 //#endif
 
-#ifndef FAN1_PIN
-  #define FAN1_PIN          6
+#ifndef FAN_PIN
+  #define FAN_PIN          6
 #endif
 
 #define TACH_0                 79 // !!! changed from 81 (EINY03)
-#define TACH_1                 80 
+#define TACH_1                 80
 
 //
 // Misc. Functions
