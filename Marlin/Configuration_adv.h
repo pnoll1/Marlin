@@ -1246,6 +1246,10 @@
    * }
    */
   #define TMC_ADV() { \
+    stepperX.coolstep_min_speed(430); \
+    stepperY.coolstep_min_speed(430); \
+    stepperZ.coolstep_min_speed(500); \
+    stepperE0.coolstep_min_speed(500); \
     stepperX.hold_delay(8); \
     stepperY.hold_delay(8); \
     stepperZ.hold_delay(8); \
