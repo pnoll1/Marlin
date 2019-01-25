@@ -449,7 +449,7 @@
 //
 // Use Junction Deviation instead of traditional Jerk Limiting
 //
-//#define JUNCTION_DEVIATION
+#define JUNCTION_DEVIATION
 #if ENABLED(JUNCTION_DEVIATION)
   #define JUNCTION_DEVIATION_MM 0.02  // (mm) Distance from real junction edge
 #endif
@@ -1105,7 +1105,7 @@
   #define X_CURRENT          282  // rms current in mA. Multiply by 1.41 for peak current.
   #define X_MICROSTEPS        16  // 0..256
 
-  #define Y_CURRENT          348
+  #define Y_CURRENT          348  //high_sense_R on for x and y, RAISING CURRENT MAY DO BAD THINGS
   #define Y_MICROSTEPS        16
 
   #define Z_CURRENT          530
@@ -1149,7 +1149,7 @@
    * Use Trinamic's ultra quiet stepping mode.
    * When disabled, Marlin will use spreadCycle stepping mode.
    */
-  #define STEALTHCHOP
+  //#define STEALTHCHOP
 
   /**
    * Monitor Trinamic TMC2130 and TMC2208 drivers for error conditions,
@@ -1176,7 +1176,7 @@
    * STEALTHCHOP needs to be enabled.
    * M913 X/Y/Z/E to live tune the setting
    */
-  #define HYBRID_THRESHOLD
+  //#define HYBRID_THRESHOLD
 
   #define X_HYBRID_THRESHOLD     5  // [mm/s]
   #define X2_HYBRID_THRESHOLD    100
@@ -1202,7 +1202,7 @@
    * It is advised to set X/Y/Z_HOME_BUMP_MM to 0.
    * M914 X/Y/Z to live tune the setting
    */
-  #define SENSORLESS_HOMING // TMC2130 only
+  #define SENSORLESS_HOMING // TMC2130 only, sets sgt
 
   #if ENABLED(SENSORLESS_HOMING)
     #define X_HOMING_SENSITIVITY  3
@@ -1245,12 +1245,15 @@
    *   stepperY.interpolate(0); \
    * }
        thigh: stepperX.mode_sw_speed(0); \
+       //prusa setup
+       stepperX.coolstep_min_speed(430); \
+       stepperY.coolstep_min_speed(430); \
+       stepperZ.coolstep_min_speed(500); \
+       stepperE0.coolstep_min_speed(500); \
    */
   #define TMC_ADV() { \
-    stepperX.coolstep_min_speed(430); \
-    stepperY.coolstep_min_speed(430); \
-    stepperZ.coolstep_min_speed(500); \
-    stepperE0.coolstep_min_speed(500); \
+    stepperX.high_sense_R(1);\
+    stepperY.high_sense_R(1);\
     stepperX.hold_delay(8); \
     stepperY.hold_delay(8); \
     stepperZ.hold_delay(8); \
