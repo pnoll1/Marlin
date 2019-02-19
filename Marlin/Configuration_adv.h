@@ -1105,7 +1105,7 @@
   #define X_CURRENT          282  // rms current in mA. Multiply by 1.41 for peak current.
   #define X_MICROSTEPS        16  // 0..256
 
-  #define Y_CURRENT          348  //high_sense_R on for x and y, RAISING CURRENT MAY DO BAD THINGS
+  #define Y_CURRENT          348  //high_sense_R on for x,y and e, RAISING CURRENT MAY DO BAD THINGS
   #define Y_MICROSTEPS        16
 
   #define Z_CURRENT          530
@@ -1204,10 +1204,15 @@
    */
   #define SENSORLESS_HOMING // TMC2130 only, sets sgt
 
+  // Uncomment this to enable a custom (typically reduced) motor current during sensorless homing
+  #define SENSORLESS_HOMING_CURRENT
   #if ENABLED(SENSORLESS_HOMING)
     #define X_HOMING_SENSITIVITY  3
     #define Y_HOMING_SENSITIVITY  3
     #define Z_HOMING_SENSITIVITY  4
+    #define X_HOMING_CURRENT    149
+    #define Y_HOMING_CURRENT    182
+    #define Z_HOMING_CURRENT    348
   #endif
 
   /**
@@ -1254,6 +1259,7 @@
   #define TMC_ADV() { \
     stepperX.high_sense_R(1);\
     stepperY.high_sense_R(1);\
+    stepperE0.high_sense_R(1);\
     stepperX.hold_delay(8); \
     stepperY.hold_delay(8); \
     stepperZ.hold_delay(8); \
