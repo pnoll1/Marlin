@@ -316,7 +316,7 @@
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_BED 1
-#define TEMP_SENSOR_CHAMBER 0
+#define TEMP_SENSOR_CHAMBER 104
 //#define TEMP_SENSOR_AMBIENT 2000 inlcuded in prusa 3.5/marlin 1.0.2 config
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
