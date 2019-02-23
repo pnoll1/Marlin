@@ -1,3 +1,12 @@
+#Differences from Prusa FW
+- No Crash Detect
+- No Power Panic
+- No Filament Sensor
+- Junction Deviation On
+- Linear Advance 1.5
+- UBL 10x10(auto probing reaches 8x10)
+- BLTOUCH Probe with offset for adapter to PINDA mount
+
 # Marlin 3D Printer Firmware
 
 [![Build Status](https://travis-ci.org/MarlinFirmware/Marlin.svg?branch=RCBugFix)](https://travis-ci.org/MarlinFirmware/Marlin)
