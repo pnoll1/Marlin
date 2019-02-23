@@ -1,4 +1,4 @@
-#Differences from Prusa FW
+# Differences from Prusa FW
 - No Crash Detect
 - No Power Panic
 - No Filament Sensor
